@@ -11,7 +11,7 @@ written entirely by hand.  This gives the new parser an incredibly fine grained 
 #NuGet#
 Install the pagckage from the NuGet Package Manager or via command line
 
-	Install-Package ExCSS 
+	Install-Package SR2.Web.ExCSS 
 
 #Lexing and Parsing - How it all Works#
 ExCSS uses a Lexer and a Parser based on a CSS3-specific grammar. The Lexer and Parser read CSS text and parse each 
