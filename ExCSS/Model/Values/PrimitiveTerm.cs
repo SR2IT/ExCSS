@@ -24,7 +24,7 @@ namespace ExCSS
 
         public PrimitiveTerm(string unit, Single value)
         {
-            PrimitiveType = ConvertStringToUnitType(unit);;
+            PrimitiveType = ConvertStringToUnitType(unit); ;
             Value = value;
         }
 
@@ -83,7 +83,7 @@ namespace ExCSS
             }
 
             char quoted = hasControl ? '\"' : '\'';
-            encoded.Insert(0, quoted);
+            encoded.Insert(0, new char[] { quoted });
             encoded.Append(quoted);
 
             return encoded.ToString();

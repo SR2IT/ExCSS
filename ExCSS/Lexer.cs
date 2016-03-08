@@ -1173,7 +1173,7 @@ namespace ExCSS
 
             current = _stylesheetReader.Previous;
             var code = int.Parse(new string(escape.ToArray()), NumberStyles.HexNumber);
-            return Char.ConvertFromUtf32(code);
+            return UTF32Char.ConvertFromUtf32(code);
         }
 
         private bool IsValidEscape(char current)
