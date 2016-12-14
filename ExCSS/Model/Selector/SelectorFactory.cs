@@ -350,6 +350,8 @@ namespace ExCSS
                     Insert(SimpleSelector.PseudoElement(data));
                     break;
             }
+
+            _selectorOperation = SelectorOperation.Data;
         }
 
         private void PraseClass(Block token)

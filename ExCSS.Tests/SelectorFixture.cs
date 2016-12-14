@@ -559,5 +559,32 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e5799',endCo
             Assert.AreEqual(css, results.ToString());
             Assert.AreEqual("*display", results.StyleRules.Single().Declarations.Single().Name);
         }
+
+        [Test]
+        public void Parser_Reads_PseudoElement_Followed_By_Comma_And_Next_Element()
+        {
+            var css = @"#fileData::-ms-browse,input#fileData{border:solid 1px gray;}";
+            var results = new Parser().Parse(css);
+            Assert.That(results.Errors.Count == 0);
+            Assert.AreEqual(css, results.ToString());
+            Assert.IsTrue(results.StyleRules.Single().Selector is AggregateSelectorList);
+            Assert.AreEqual(2, ((AggregateSelectorList)results.StyleRules.Single().Selector).Count());
+            Assert.AreEqual("#fileData::-ms-browse", ((AggregateSelectorList)results.StyleRules.Single().Selector).First().ToString());
+            Assert.AreEqual("input#fileData", ((AggregateSelectorList)results.StyleRules.Single().Selector).Last().ToString());
+        }
+
+        [Test]
+        public void Parser_Reads_PseudoElement_Followed_By_Inner_Element()
+        {
+            var css = @"#fileData::-ms-browse p.myclass,input#fileData{border:solid 1px gray;}";
+            var results = new Parser().Parse(css);
+            Assert.That(results.Errors.Count == 0);
+            Assert.AreEqual(css, results.ToString());
+            Assert.IsTrue(results.StyleRules.Single().Selector is AggregateSelectorList);
+            Assert.AreEqual(2, ((AggregateSelectorList)results.StyleRules.Single().Selector).Count());
+            Assert.AreEqual("#fileData::-ms-browse p.myclass", ((AggregateSelectorList)results.StyleRules.Single().Selector).First().ToString());
+            Assert.AreEqual("input#fileData", ((AggregateSelectorList)results.StyleRules.Single().Selector).Last().ToString());
+        }
+
     }
 }
